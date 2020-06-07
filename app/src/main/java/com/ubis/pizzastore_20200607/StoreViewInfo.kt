@@ -3,18 +3,16 @@ package com.ubis.pizzastore_20200607
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
-class StoryListItem : baseActivity() {
-
+class StoreViewInfo : baseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_story_list_item)
+        setContentView(R.layout.activity_store_view_info)
 
-        setValurs()
         setEvents()
+        setValurs()
     }
 
     override fun setValurs() {
-
     }
 
     override fun setEvents() {

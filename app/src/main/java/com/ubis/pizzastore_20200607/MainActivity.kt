@@ -1,9 +1,12 @@
 package com.ubis.pizzastore_20200607
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import com.ubis.pizzastore_20200607.adapters.StoreAdapter
 import com.ubis.pizzastore_20200607.data.story
+import kotlinx.android.synthetic.main.activity_main.*
 import java.util.jar.Attributes
 
 class MainActivity : baseActivity() {
@@ -11,7 +14,7 @@ class MainActivity : baseActivity() {
     val pizzaStores = ArrayList<story>()
     // Oncreate가 실행된이후에 내용을 채워야함
     // 변수는 멤버변수로 만들어두면 차후에 편리하다
-    lateinit var StoreAdapter:StoreAdapter
+    lateinit var nStoreAdapter:StoreAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,11 +26,24 @@ class MainActivity : baseActivity() {
 
     override fun setValurs() {
         addStroes()
+        nStoreAdapter = StoreAdapter(mContext, R.layout.activity_story_list_item, pizzaStores)
+        pizzaStoryListView.adapter = nStoreAdapter
     }
 
     override fun setEvents() {
+        pizzaStoryListView.setOnItemLongClickListener { parent, view, position, id ->
+
+            // 어느줄이 눌렸는가 position 을 이용하여
+            val clickedStore = pizzaStores[position]
+
+            // 가게 상세 화면으로 넘기기
+            val myIntent = Intent(mContext, StoreViewInfo::class.java)
+            //myIntent.putExtra("StoreData", clickedStore)
+            //startActivity(myIntent)
 
 
+            return@setOnItemLongClickListener true
+        }
     }
 
     fun addStroes(){
@@ -36,5 +52,4 @@ class MainActivity : baseActivity() {
         pizzaStores.add(story(urlAddress =  "https://post-phinf.pstatic.net/MjAxODEyMDVfMzYg/MDAxNTQzOTYxOTA4NjM3.8gsStnhxz7eEc9zpt5nmSRZmI-Pzpl4NJvHYU-Dlgmcg.7Vpgk0lopJ5GoTav3CUDqmXi2-_67S5AXD0AGbbR6J4g.JPEG/IMG_1641.jpg?type=w1200",name = "미스터피자",Phonenum = "1577-0077"))
         pizzaStores.add(story(urlAddress =  "https://pbs.twimg.com/profile_images/1098371010548555776/trCrCTDN_400x400.png",name = "도미노피자",Phonenum = "1577-3082"))
     }
-
 }

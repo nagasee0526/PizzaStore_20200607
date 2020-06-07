@@ -5,6 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.ImageView
+import android.widget.TextView
+import com.bumptech.glide.Glide
 import com.ubis.pizzastore_20200607.R
 import com.ubis.pizzastore_20200607.data.story
 import kotlinx.android.synthetic.main.activity_main.view.*
@@ -24,8 +27,21 @@ class StoreAdapter(context: Context, resId: Int, list: List<story>) : ArrayAdapt
         }
         val row = tempRow!!
 
-        //자리에 맞는 데이터 불러오기
+
+        // 아이디 찾아서 데이터 옯기기
+        val logoImg = row.findViewById<ImageView>(R.id.logoImg)
+        val storeName = row.findViewById<TextView>(R.id.StoreNameTxt)
+
+
+        // 뷰에뿌려질 데이터를 들고있을 변수 생성
+        // 액티비티가 전달해줄 mList에서 꺼내보자
         //val data = mList.get(position)
+        val data = mList[position]
+
+        // data 안에 있는 가게이름을storenametxt에 글자로 설정
+        storeName.text = data.name
+        // data안에 있는 로고url을 logoImg 웹에서 다운받아 뿌려준다
+        Glide.with(mContext).load("${data.urlAddress}").into(logoImg)
 
         return row
     }
