@@ -38,9 +38,9 @@ class MainActivity : baseActivity() {
 
             // 가게 상세 화면으로 넘기기
             val myIntent = Intent(mContext, StoreViewInfo::class.java)
-            //myIntent.putExtra("StoreData", clickedStore)
-            //startActivity(myIntent)
-
+            // 클릭한 가게를 상세조회화면으로 전달
+            myIntent.putExtra("StoreData", clickedStore)
+            startActivity(myIntent)
 
             return@setOnItemLongClickListener true
         }
